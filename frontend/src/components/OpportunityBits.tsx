@@ -55,11 +55,10 @@ export function PlanTimeline({ plan }: { plan: PlanStep[] }) {
 export function CostTable({ cost }: { cost: Cost }) {
   const rows: [string, string][] =
     cost.kind === "salary"
-      ? [["Hourly rate", gbp(cost.hourly_rate, 2)], ["Annual salary", gbp(cost.annual_salary ?? 0)], ["Monthly", gbp(cost.monthly_salary ?? 0)], ["FirstHire (3-month minimum)", gbp(cost.platform_fee)]]
+      ? [["Hourly rate", gbp(cost.hourly_rate, 2)], ["Annual salary", gbp(cost.annual_salary ?? 0)], ["Monthly", gbp(cost.monthly_salary ?? 0)]]
       : [
           ["Wages", `${gbp(cost.wages ?? 0, 2)}`],
           ["Holiday pay accrual (12.07%)", gbp(cost.holiday_accrual ?? 0, 2)],
-          ["FirstHire subscription", gbp(cost.platform_fee)],
         ];
   return (
     <div className="rounded-xl border border-line">

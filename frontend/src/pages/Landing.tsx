@@ -69,7 +69,7 @@ export default function Landing() {
                 <Building2 className="size-5" /> I run a business
               </Link>
             </div>
-            <p className="mt-5 flex items-center gap-2 text-sm text-white/60"><Lock className="size-4" /> Free for students, always. Firms pay — never students.</p>
+            <p className="mt-5 flex items-center gap-2 text-sm text-white/60"><Lock className="size-4" /> Free to use for graduates and businesses. Firms only pay the graduate's wage.</p>
           </div>
 
           {/* Product preview */}
@@ -95,7 +95,7 @@ export default function Landing() {
             <div className="absolute bottom-0 -left-8 w-72 rotate-[3deg] rounded-2xl bg-white p-4 text-[#0f1b2d] shadow-2xl">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#6d3fd8]"><Lightbulb className="size-4" /> Growth Advisor</div>
               <div className="mt-1 text-sm font-semibold">640 five-star reviews, but no website.</div>
-              <div className="mt-1 text-xs text-[#475467]">Suggest a paid 8-week student project? Est. £1,856 incl. holiday pay.</div>
+              <div className="mt-1 text-xs text-[#475467]">Suggest a paid 8-week student project? Est. £1,709 incl. holiday pay.</div>
             </div>
           </div>
         </div>

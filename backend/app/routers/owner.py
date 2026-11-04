@@ -91,8 +91,7 @@ def dashboard(user: dict = Depends(owner), conn: sqlite3.Connection = Depends(ge
         "companies_house_mode": companies_house.mode(),
         "metrics": metrics, "impact": _impact(metrics, insights), "kpis": kpis,
         "insights": insights, "opportunities": opps, "ai_mode": owner_agent.ai_mode(),
-        "rules": {"minimum_rate": wages.NLW_APRIL_2026, "max_part_time_hours": wages.STUDENT_VISA_TERM_HOURS,
-                  "platform_fee_monthly": wages.PLATFORM_FEE_MONTHLY},
+        "rules": {"minimum_rate": wages.NLW_APRIL_2026, "max_part_time_hours": wages.STUDENT_VISA_TERM_HOURS},
     }
 
 

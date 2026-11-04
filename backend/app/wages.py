@@ -8,8 +8,6 @@ whatever the student's age and whatever the role is called. No unpaid work.
 NLW_APRIL_2026 = 12.71          # 21 and over
 RATE_18_20_APRIL_2026 = 10.85
 HOLIDAY_ACCRUAL = 0.1207        # 5.6 weeks' statutory leave for irregular-hours workers
-PLATFORM_FEE_MONTHLY = 49.0
-PLATFORM_MIN_MONTHS = 3
 STUDENT_VISA_TERM_HOURS = 20
 FULL_TIME_HOURS = 37.5
 
@@ -37,13 +35,10 @@ def cost_breakdown(hourly_rate: float, hours_per_week: float, weeks: int | None,
             "meets_minimum": rate >= NLW_APRIL_2026,
             "minimum_rate": NLW_APRIL_2026,
             "visa_friendly": hours_per_week <= STUDENT_VISA_TERM_HOURS,
-            "platform_fee": PLATFORM_FEE_MONTHLY * PLATFORM_MIN_MONTHS,
             "notes": "Salary before employer NI and pension. First-year progression should be stated in the advert.",
         }
     wages = round(rate * hours_per_week * weeks, 2)
     holiday = round(wages * HOLIDAY_ACCRUAL, 2)
-    months = max(PLATFORM_MIN_MONTHS, -(-weeks // 4))
-    fee = PLATFORM_FEE_MONTHLY * months
     return {
         "kind": "fixed_term",
         "hourly_rate": rate,
@@ -51,8 +46,7 @@ def cost_breakdown(hourly_rate: float, hours_per_week: float, weeks: int | None,
         "hours_per_week": hours_per_week,
         "wages": wages,
         "holiday_accrual": holiday,
-        "platform_fee": fee,
-        "total_estimate": round(wages + holiday + fee, 2),
+        "total_estimate": round(wages + holiday, 2),
         "meets_minimum": rate >= NLW_APRIL_2026,
         "minimum_rate": NLW_APRIL_2026,
         "visa_friendly": hours_per_week <= STUDENT_VISA_TERM_HOURS,

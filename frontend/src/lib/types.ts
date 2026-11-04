@@ -12,7 +12,6 @@ export type Cost = {
   hours_per_week?: number;
   wages?: number;
   holiday_accrual?: number;
-  platform_fee: number;
   total_estimate?: number;
   annual_salary?: number;
   monthly_salary?: number;
@@ -167,7 +166,7 @@ export type Dashboard = {
   insights: Insight[];
   opportunities: Opportunity[];
   ai_mode: "claude" | "offline";
-  rules: { minimum_rate: number; max_part_time_hours: number; platform_fee_monthly: number };
+  rules: { minimum_rate: number; max_part_time_hours: number };
 };
 
 export type DraftOpportunity = {
