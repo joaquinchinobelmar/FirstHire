@@ -42,6 +42,21 @@ the same passwords.
 
 API docs: http://localhost:8000/api/docs · Health/AI mode: http://localhost:8000/api/health
 
+### Sign up with LinkedIn (graduates)
+
+"Continue with LinkedIn" on the login page uses LinkedIn's **Sign In with LinkedIn using OpenID Connect**
+(scopes `openid profile email`). It creates a graduate account in one click and lands the user on their
+Passport with a prompt to upload their CV. We store only name and email; the photo is discarded to keep
+the blind first review. LinkedIn does not give third-party apps work history or skills, so the CV
+upload still fills the Passport.
+
+- **Live:** create an app at linkedin.com/developers, add the "Sign In with LinkedIn using OpenID
+  Connect" product, register `http://localhost:5173/api/auth/linkedin/callback`, and set
+  `LINKEDIN_CLIENT_ID` / `LINKEDIN_CLIENT_SECRET` in `backend/.env`.
+- **Demo (no keys):** a clearly labelled simulated consent screen produces the same name + email.
+  A demo sign-in can never take over an existing account. In live mode, an existing graduate account is
+  linked only when LinkedIn reports the email as verified. Business accounts can't use LinkedIn sign-in.
+
 ### Modes
 
 - **Claude mode:** set `ANTHROPIC_API_KEY` in `backend/.env`. The UI shows a "Claude AI" badge.

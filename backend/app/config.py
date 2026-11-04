@@ -27,6 +27,11 @@ class Settings:
 
     companies_house_key: str = os.getenv("COMPANIES_HOUSE_API_KEY", "").strip()
 
+    # Sign In with LinkedIn using OpenID Connect (students only)
+    linkedin_client_id: str = os.getenv("LINKEDIN_CLIENT_ID", "").strip()
+    linkedin_client_secret: str = os.getenv("LINKEDIN_CLIENT_SECRET", "").strip()
+    linkedin_redirect_uri: str = os.getenv("LINKEDIN_REDIRECT_URI", "http://localhost:5173/api/auth/linkedin/callback")
+
     session_ttl_hours: int = int(os.getenv("SESSION_TTL_HOURS", "12"))
     cookie_secure: bool = _bool("COOKIE_SECURE", False)
     frontend_origin: str = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
@@ -34,6 +39,11 @@ class Settings:
     # Product rules enforced in code (never by the model)
     monthly_application_limit: int = 8
     min_answer_chars: int = 40
+
+    @property
+    def linkedin_mode(self) -> str:
+        """live = real LinkedIn OAuth; demo = local simulated consent screen (no keys configured)."""
+        return "live" if self.linkedin_client_id and self.linkedin_client_secret else "demo"
 
     @property
     def ai_enabled(self) -> bool:

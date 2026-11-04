@@ -8,6 +8,7 @@ import type { Role } from "./lib/types";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Trust from "./pages/Trust";
+import LinkedInDemo from "./pages/LinkedInDemo";
 import Profile from "./pages/graduate/Profile";
 import Opportunities from "./pages/graduate/Opportunities";
 import Applications from "./pages/graduate/Applications";
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/trust" element={<Trust />} />
+      <Route path="/auth/linkedin/demo" element={<LinkedInDemo />} />
       <Route path="/graduate" element={<RequireRole role="graduate"><AppShell tabs={GRAD_TABS} areaLabel="Graduate" /></RequireRole>}>
         <Route index element={<Navigate to="profile" replace />} />
         <Route path="profile" element={<Profile />} />

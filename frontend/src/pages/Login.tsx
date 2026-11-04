@@ -4,13 +4,15 @@ import { Building2, GraduationCap, Lock, ShieldCheck } from "lucide-react";
 import { Logo } from "../components/AppShell";
 import { Alert, Button, Field, Input, cx } from "../components/ui";
 import { homeFor, useAuth } from "../lib/auth";
+import { LinkedInButton } from "../components/LinkedInButton";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 export default function Login() {
   const [params] = useSearchParams();
   const [as, setAs] = useState<"graduate" | "owner">(params.get("as") === "owner" ? "owner" : "graduate");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(params.get("error"));
   const [busy, setBusy] = useState(false);
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -52,7 +54,8 @@ export default function Login() {
         <p className="relative text-sm text-white/50">Your data stays inside FirstHire. It is never sold or used for advertising.</p>
       </aside>
 
-      <main className="flex items-center justify-center px-4 py-12">
+      <main className="relative flex items-center justify-center px-4 py-12">
+        <ThemeToggle className="absolute right-4 top-4 sm:right-6 sm:top-6" />
         <div className="w-full max-w-md">
           <Link to="/" className="mb-8 inline-block lg:hidden"><Logo /></Link>
           <h1 className="text-3xl font-extrabold">Sign in</h1>
@@ -72,6 +75,18 @@ export default function Login() {
               </button>
             ))}
           </div>
+
+          {as === "graduate" && (
+            <div className="mt-6">
+              <LinkedInButton />
+              <p className="mt-2 text-center text-xs text-ink-3">
+                New here? This creates your account in one click. We only receive your name and email: no photo, no connections, no posting.
+              </p>
+              <div className="mt-5 flex items-center gap-3 text-xs font-medium text-ink-3">
+                <span className="h-px flex-1 bg-line" /> or sign in with email <span className="h-px flex-1 bg-line" />
+              </div>
+            </div>
+          )}
 
           <form onSubmit={submit} className="mt-6 space-y-4">
             <Field label="Email">

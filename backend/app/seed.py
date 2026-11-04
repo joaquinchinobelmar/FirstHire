@@ -8,8 +8,10 @@ hashes in the DB, and written in plain text to backend/DEMO_CREDENTIALS.local.md
 """
 
 import json
+import os
 import random
 import secrets
+import sys
 from datetime import date, datetime, timedelta
 
 from .config import BACKEND_DIR, settings
@@ -35,6 +37,13 @@ def _password() -> str:
 
 
 def _load_or_create_passwords() -> dict[str, str]:
+    # Hosted deployments: passwords come from the DEMO_PASSWORDS env var (JSON {email: password}),
+    # set as a secret on the host. Nothing is written to disk and nothing lives in git.
+    env_json = os.getenv("DEMO_PASSWORDS", "").strip()
+    if env_json:
+        provided = json.loads(env_json)
+        return {email: provided.get(email) or _password() for email, _, _ in USERS}
+
     existing: dict[str, str] = {}
     if CRED_FILE.exists():
         for line in CRED_FILE.read_text(encoding="utf-8").splitlines():
@@ -407,8 +416,17 @@ def seed() -> None:
                 )
     conn.close()
     print(f"Seeded {len(FIRMS)} firms, {len(OPPS)} opportunities, {len(STUDENTS)} graduates, {len(USERS)} demo logins.")
-    print(f"Demo credentials written to {CRED_FILE} (git-ignored).")
+    if os.getenv("DEMO_PASSWORDS"):
+        print("Demo passwords taken from the DEMO_PASSWORDS environment variable.")
+    else:
+        print(f"Demo credentials written to {CRED_FILE} (git-ignored).")
+
+
+def print_env() -> None:
+    """Print the local demo passwords as a DEMO_PASSWORDS value to paste into the host's secrets."""
+    passwords = _load_or_create_passwords()
+    print("DEMO_PASSWORDS=" + json.dumps(passwords, separators=(",", ":")))
 
 
 if __name__ == "__main__":
-    seed()
+    print_env() if "--print-env" in sys.argv else seed()

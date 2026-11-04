@@ -177,6 +177,11 @@ def connect() -> sqlite3.Connection:
 def init_db() -> None:
     with connect() as conn:
         conn.executescript(SCHEMA)
+        # Lightweight migrations for databases created by earlier versions
+        cols = {r["name"] for r in conn.execute("PRAGMA table_info(users)")}
+        if "linkedin_sub" not in cols:
+            conn.execute("ALTER TABLE users ADD COLUMN linkedin_sub TEXT")
+        conn.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_users_linkedin ON users(linkedin_sub) WHERE linkedin_sub IS NOT NULL")
 
 
 def get_db() -> Iterator[sqlite3.Connection]:

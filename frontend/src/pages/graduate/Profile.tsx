@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, EyeOff, FileUp, Plus, Save, ShieldCheck, Sparkles, Trash2, Wand2 } from "lucide-react";
 import { AiBadge, Alert, Button, Card, Field, Input, Modal, PageHeader, Select, Spinner, TagInput, Textarea, Toast, cx } from "../../components/ui";
 import { api } from "../../lib/api";
@@ -24,6 +24,8 @@ export default function Profile() {
   const [draft, setDraft] = useState<CvDraft | null>(null);
   const [drafting, setDrafting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [params] = useSearchParams();
+  const welcome = params.get("welcome") === "linkedin";
 
   useEffect(() => { api.get<Passport>("/student/passport").then(setP).catch((e) => setError(e.message)); }, []);
 
@@ -113,6 +115,12 @@ export default function Profile() {
           </>
         }
       />
+      {welcome && (
+        <Alert tone="brand" icon={<Sparkles className="size-4" />} className="mb-5">
+          <b>Welcome to FirstHire, {p.full_name.split(" ")[0]}!</b> Your account was created with LinkedIn. We only received your name and email.
+          Next step: <b>upload your CV</b> below and the AI will draft your Passport. Then set your home town and travel radius so we only show local roles.
+        </Alert>
+      )}
       {error && <Alert tone="bad" className="mb-5">{error}</Alert>}
 
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">

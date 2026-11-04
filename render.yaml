@@ -1,0 +1,34 @@
+# Render Blueprint for the FirstHire API (FastAPI + SQLite).
+# The frontend lives on Vercel and proxies /api/* here (see frontend/vercel.json).
+# Free-tier disks are ephemeral: on every restart the API re-creates the synthetic demo data automatically.
+services:
+  - type: web
+    name: firsthire-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: CLAUDE_MODEL
+        value: claude-opus-5-5
+      - key: CLAUDE_EFFORT
+        value: medium
+      # Secrets: Render asks for these when you create the Blueprint
+      - key: DEMO_PASSWORDS
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: COMPANIES_HOUSE_API_KEY
+        sync: false
+      - key: LINKEDIN_CLIENT_ID
+        sync: false
+      - key: LINKEDIN_CLIENT_SECRET
+        sync: false
+      - key: LINKEDIN_REDIRECT_URI
+        sync: false

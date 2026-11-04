@@ -7,6 +7,7 @@ import {
 import { Logo } from "../components/AppShell";
 import { api } from "../lib/api";
 import { useAuth, homeFor } from "../lib/auth";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 type Stats = { firms: number; open_opportunities: number; towns: number; graduates: number };
 
@@ -36,9 +37,12 @@ export default function Landing() {
             <a href="#trust" className="hover:text-white">Trust</a>
             <Link to="/trust" className="hover:text-white">Privacy</Link>
           </nav>
-          <Link to={cta} className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-navy hover:bg-white/90">
-            {user ? "Open dashboard" : "Sign in"}
-          </Link>
+          <div className="flex items-center gap-3">
+            <ThemeToggle onDark />
+            <Link to={cta} className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#0b1f3a] hover:bg-white/90">
+              {user ? "Open dashboard" : "Sign in"}
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -69,11 +73,11 @@ export default function Landing() {
           </div>
 
           {/* Product preview */}
-          <div className="relative hidden pb-24 lg:block" aria-hidden>
+          <div className="relative hidden pb-36 lg:block" aria-hidden>
             <div className="rotate-[-2deg] rounded-2xl bg-white p-5 text-ink shadow-2xl">
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wide text-ink-3">Paid project · 8 weeks</div>
+                  <div className="text-xs font-semibold uppercase tracking-wide text-[#5f6573]">Paid project · 8 weeks</div>
                   <div className="mt-1 font-display text-lg font-bold text-[#0f1b2d]">Website & online ordering build</div>
                   <div className="text-sm text-[#475467]">Tyne Street Kitchen · Gateshead · 0.8 mi</div>
                 </div>

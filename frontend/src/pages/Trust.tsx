@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Download, Eye, FileLock2, History, ServerCog, ShieldCheck, Trash2 } from "lucide-react";
 import { Logo } from "../components/AppShell";
+import { ThemeToggle } from "../components/ThemeToggle";
 import { Alert, Button, Card, Modal } from "../components/ui";
 import { api } from "../lib/api";
 import { homeFor, useAuth } from "../lib/auth";
@@ -74,9 +75,12 @@ export default function Trust() {
       <header className="border-b border-line bg-surface">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
           <Link to="/"><Logo /></Link>
-          <Link to={user ? homeFor(user.role) : "/"} className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-2 hover:text-ink">
-            <ArrowLeft className="size-4" /> Back
-          </Link>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Link to={user ? homeFor(user.role) : "/"} className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-2 hover:text-ink">
+              <ArrowLeft className="size-4" /> Back
+            </Link>
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6">

@@ -143,7 +143,7 @@ export default function Applicants() {
           {FILTERS.map((f) => {
             const n = data.applicants.filter((a) => (oppFilter === "all" || String(a.opportunity.id) === oppFilter) && (f === "all" || a.status === f)).length;
             return (
-              <button key={f} onClick={() => setStatus(f)} className={cx("cursor-pointer rounded-full px-3 py-1 text-sm font-semibold", status === f ? "bg-navy text-white" : "bg-surface text-ink-2 ring-1 ring-line hover:bg-surface-2")}>
+              <button key={f} onClick={() => setStatus(f)} className={cx("cursor-pointer rounded-full px-3 py-1 text-sm font-semibold", status === f ? "bg-ink text-bg" :"bg-surface text-ink-2 ring-1 ring-line hover:bg-surface-2")}>
                 {f === "all" ? "All" : STATUS_LABEL[f]} <span className="opacity-60">{n}</span>
               </button>
             );

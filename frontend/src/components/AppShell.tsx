@@ -3,6 +3,7 @@ import { LogOut, ShieldCheck } from "lucide-react";
 import type { ReactNode } from "react";
 import { useAuth } from "../lib/auth";
 import { cx } from "./ui";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Logo({ light }: { light?: boolean }) {
   return (
@@ -37,6 +38,7 @@ export function AppShell({ tabs, areaLabel }: { tabs: Tab[]; areaLabel: string }
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
+            <ThemeToggle className="mr-1" />
             <NavLink to="/trust" className="hidden items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-2 hover:bg-surface-2 sm:flex">
               <ShieldCheck className="size-4 text-good" /> Privacy & trust
             </NavLink>

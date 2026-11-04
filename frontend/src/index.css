@@ -1,32 +1,34 @@
 @import "tailwindcss";
 
-/* ---------- Design tokens (light + selected dark) ---------- */
+/* ---------- Design tokens ----------
+   Light = warm off-white. Dark = deep navy.
+   Theme follows the OS until the user flips the switch (stored as <html data-theme>). */
 :root {
   color-scheme: light;
-  --bg: #f5f7fa;
-  --surface: #ffffff;
-  --surface-2: #f0f3f7;
-  --border: #e1e6ed;
-  --ink: #0f1b2d;
-  --ink-2: #475467;
-  --ink-3: #6b7789;
+  --bg: #f6f4ef;
+  --surface: #fffdf9;
+  --surface-2: #efece4;
+  --border: #e2ded3;
+  --ink: #141a26;
+  --ink-2: #4b5263;
+  --ink-3: #5f6573;
   --brand: #1f4fd1;
   --brand-hover: #1a43b3;
-  --brand-soft: #e9efff;
+  --brand-soft: #e7edfc;
   --brand-ink: #ffffff;
   --navy: #0b1f3a;
   --gold: #f5b83d;
   --ai: #6d3fd8;
-  --ai-soft: #f2ecff;
-  --good: #157a3c;
-  --good-soft: #e5f5eb;
-  --warn: #a65c06;
-  --warn-soft: #fdf2e1;
+  --ai-soft: #f0e9fd;
+  --good: #146c36;
+  --good-soft: #e3f3e8;
+  --warn: #965305;
+  --warn-soft: #fcf0dc;
   --bad: #b42318;
-  --bad-soft: #fdeceb;
+  --bad-soft: #fbe9e7;
   --chart-1: #2a78d6;
-  --chart-grid: #e8ecf1;
-  --shadow: 0 1px 2px rgb(15 27 45 / 0.05), 0 4px 16px rgb(15 27 45 / 0.06);
+  --chart-grid: #e7e3d9;
+  --shadow: 0 1px 2px rgb(40 32 16 / 0.05), 0 4px 16px rgb(40 32 16 / 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +40,7 @@
     --border: #283345;
     --ink: #e9eef5;
     --ink-2: #aeb9c8;
-    --ink-3: #808ca0;
+    --ink-3: #8b97aa;
     --brand: #5b8cff;
     --brand-hover: #7aa2ff;
     --brand-soft: #1a2849;
@@ -56,6 +58,33 @@
     --chart-grid: #233042;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c111a;
+  --surface: #141b26;
+  --surface-2: #1b2431;
+  --border: #283345;
+  --ink: #e9eef5;
+  --ink-2: #aeb9c8;
+  --ink-3: #8b97aa;
+  --brand: #5b8cff;
+  --brand-hover: #7aa2ff;
+  --brand-soft: #1a2849;
+  --brand-ink: #08101f;
+  --navy: #0a1424;
+  --ai: #a68bfa;
+  --ai-soft: #251c40;
+  --good: #4cc77d;
+  --good-soft: #10291b;
+  --warn: #f0b44c;
+  --warn-soft: #2f230f;
+  --bad: #f27a70;
+  --bad-soft: #351513;
+  --chart-1: #3987e5;
+  --chart-grid: #233042;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
 }
 
 @theme inline {
@@ -91,6 +120,7 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
 
